@@ -8,6 +8,7 @@ body{
 .Table{
   width: 300px;
   height: 300px;
+ margin-left: 40%;
 }
 
 .Square{
@@ -18,4 +19,18 @@ body{
   margin:0px 0px;
   display: inline-block;
   vertical-align: top;
+}
+.winningText{
+  color: rgb(252, 164, 1);
+  font-weight: bold;
+  font-family: 'Courier New', Courier, monospace;
+  animation-name: scaling;
+  animation-duration: 2s;
+  animation-iteration-count: infinite;
+}
+@keyframes scaling {
+  0%{transform:scale(1)}
+  50%{transform:scale(1.2)}
+  100%{transform:scale(1)}
+
 }

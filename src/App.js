@@ -8,7 +8,7 @@ class App extends Component {
   {
     super();
     this.state={
-      CurrentPlayer:"x",
+      CurrentPlayer:"X",
       TicTacTable:[
         {id:1,value:""},{id:2,value:""},{id:3,value:""},{id:4,value:""},{id:5,value:""},{id:6,value:""},{id:7,value:""},{id:8,value:""},{id:9,value:""}
       ],
@@ -30,7 +30,7 @@ class App extends Component {
       [this.state.TicTacTable[2],this.state.TicTacTable[4],this.state.TicTacTable[6]]
       
     )
-    console.log(this.state.WinningOutcomes);
+    // console.log(this.state.WinningOutcomes);
   }
 
   InsertValue=(id)=>{
@@ -61,8 +61,7 @@ class App extends Component {
         return winOutcome;
       })
 
-      state.CurrentPlayer==="x"? state.CurrentPlayer="o":state.CurrentPlayer="x";
-      console.log(this.state.WinningOutcomes);
+      if(state.Winner!==true) {state.CurrentPlayer==="X"? state.CurrentPlayer="O":state.CurrentPlayer="X";}
       return state;
     })
     
@@ -70,6 +69,8 @@ class App extends Component {
   render(){
     return (
       <div className="App">
+        <h1>Tic-Tac-Toe</h1>
+        <h3 className="winningText">{this.state.Winner? "Player "+this.state.CurrentPlayer+ " WON !!": null}</h3>
         <Table tables={this.state.TicTacTable} InsertValue={this.InsertValue}/>
       </div>
     );
