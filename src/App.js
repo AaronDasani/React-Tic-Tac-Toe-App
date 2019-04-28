@@ -33,15 +33,21 @@ class App extends Component {
     // console.log(this.state.WinningOutcomes);
   }
 
+  ResetGame=()=>{
+    this.setState((state)=>{
+      return state.TicTacTable.map((square)=>square.value!==""? square.value="":null)
+    });
+  }
   InsertValue=(id)=>{
-    console.log("Sqaure Id:",id);
+    let successfullMove=false;
     if (this.state.Winner===true) {
       return;
     }
     this.setState((state)=>{
       state.TicTacTable.map((square)=>{
-        if (square.id===id) {
+        if (square.id===id && square.value==="") {
           square.value=state.CurrentPlayer;
+          successfullMove=true;
         }
         return square;
       })
@@ -61,7 +67,7 @@ class App extends Component {
         return winOutcome;
       })
 
-      if(state.Winner!==true) {state.CurrentPlayer==="X"? state.CurrentPlayer="O":state.CurrentPlayer="X";}
+      if(state.Winner!==true && successfullMove===true) {state.CurrentPlayer==="X"? state.CurrentPlayer="O":state.CurrentPlayer="X";}
       return state;
     })
     
@@ -69,9 +75,11 @@ class App extends Component {
   render(){
     return (
       <div className="App">
-        <h1>Tic-Tac-Toe</h1>
+        <h1 style={{color:"white"}}>Tic-Tac-Toe</h1>
         <h3 className="winningText">{this.state.Winner? "Player "+this.state.CurrentPlayer+ " WON !!": null}</h3>
         <Table tables={this.state.TicTacTable} InsertValue={this.InsertValue}/>
+
+        <span onClick={this.ResetGame} className="Reset">Reset</span>
       </div>
     );
   }
